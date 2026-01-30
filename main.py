@@ -64,7 +64,9 @@ def add_ips_to_nsg(network_client, nsg_id, description, ips):
             source=ip,
             source_type="CIDR_BLOCK",
             description=description,
-            tcp_options=oci.core.models.TcpOptions(source_port_range=443, destination_port_range=443)
+            tcp_options=oci.core.models.TcpOptions(
+                destination_port_range=oci.core.models.PortRange(min=443, max=443)
+            )
         )
         rules.append(ingress_security_rule)
 
